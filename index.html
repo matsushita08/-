@@ -90,7 +90,7 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
   </div>
 
   <div class="card-row">
-    <a class="link-card" id="card0" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1" target="_blank" rel="noreferrer noopener">
+    <a class="link-card" id="card0" href="https://thinkgold-my.sharepoint.com/:f:/g/personal/ggmfc_goldsgym_jp/Emcc-7FUZORHv0uxdcFJ8wsBnCVWPJDzecxrpW-uQl8kpQ?e=GFInOX" target="_blank" rel="noreferrer noopener">
       <div class="link-icon">📅</div>
       <div class="link-body"><h3 id="label0">南船橋シフト</h3><p id="desc0">SharePoint → シフトフォルダ</p></div>
       <div class="link-arrow">›</div>
@@ -153,11 +153,16 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
 
 <script>
 const DEFAULTS=[
-  {label:'南船橋シフト',url:'https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1',desc:'SharePoint → シフトフォルダ'},
+  {label:'南船橋シフト',url:'https://thinkgold-my.sharepoint.com/:f:/g/personal/ggmfc_goldsgym_jp/Emcc-7FUZORHv0uxdcFJ8wsBnCVWPJDzecxrpW-uQl8kpQ?e=GFInOX',desc:'SharePoint → シフトフォルダ'},
   {label:'シフト申請',url:'https://forms.gle/AH6txmN4ZKJmqvQy8',desc:'Googleフォームで送信'},
 ];
-let data=JSON.parse(localStorage.getItem('shiftGG')||'null')||{links:DEFAULTS.map(d=>({...d})),log:[],lastUpdater:''};
-function save(){localStorage.setItem('shiftGG',JSON.stringify(data));}
+let data={links:DEFAULTS.map(d=>({...d})),log:[],lastUpdater:''};
+function save(){localStorage.setItem('shiftGG2',JSON.stringify({log:data.log,lastUpdater:data.lastUpdater}));}
+(function(){
+  const saved=JSON.parse(localStorage.getItem('shiftGG2')||'null');
+  if(saved){data.log=saved.log||[];data.lastUpdater=saved.lastUpdater||'';}
+})();
+
 (function tick(){
   const now=new Date();
   document.getElementById('currentTime').textContent=
@@ -165,6 +170,7 @@ function save(){localStorage.setItem('shiftGG',JSON.stringify(data));}
     now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
   setTimeout(tick,10000);
 })();
+
 function initCards(){
   data.links.forEach((l,i)=>{
     document.getElementById('label'+i).textContent=l.label;
@@ -172,6 +178,7 @@ function initCards(){
     document.getElementById('card'+i).href=l.url||'#';
   });
 }
+
 let editingIndex=0;
 function openEditModal(i){
   editingIndex=i;
@@ -186,7 +193,7 @@ function saveEdit(){
   if(!label||!url){showToast('名前とURLを入力してください');return;}
   data.links[editingIndex].label=label;
   data.links[editingIndex].url=url;
-  save();initCards();closeAll();
+  initCards();closeAll();
   showToast('保存しました ✓');
 }
 function openUpdateModal(){
