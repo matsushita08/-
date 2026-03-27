@@ -10,7 +10,7 @@
 <title>シフトランチャー</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0d14;--surface:#16161f;--surface2:#1e1e2a;--border:rgba(255,255,255,0.07);--accent:#4f8ef7;--accent2:#7c5cfc;--green:#2dd4a0;--text:#e8e8f2;--muted:#6b6b85;--mono:'DM Mono',monospace;}
+:root{--bg:#0d0d14;--surface:#16161f;--surface2:#1e1e2a;--border:rgba(255,255,255,0.07);--accent:#4f8ef7;--accent2:#7c5cfc;--green:#2dd4a0;--red:#f7564f;--text:#e8e8f2;--muted:#6b6b85;--mono:'DM Mono',monospace;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;padding-bottom:48px;}
 .header{padding:52px 20px 20px;background:linear-gradient(180deg,rgba(79,142,247,0.07) 0%,transparent 100%);border-bottom:1px solid var(--border);}
@@ -20,49 +20,39 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .header-time{font-size:12px;color:var(--muted);margin-top:5px;font-family:var(--mono);}
 .section{padding:22px 16px 0;}
 .section-label{font-size:10px;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:10px;font-family:var(--mono);}
-.link-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:10px;cursor:pointer;transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1);}
+.link-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:10px;cursor:pointer;transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;color:var(--text);}
 .link-card:active{transform:scale(0.96);}
 .link-card.blue{border-color:rgba(79,142,247,0.25);}
 .link-card.green{border-color:rgba(45,212,160,0.2);}
-.link-card.purple{border-color:rgba(124,92,252,0.2);}
 .link-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .link-card.blue .link-icon{background:rgba(79,142,247,0.13);}
 .link-card.green .link-icon{background:rgba(45,212,160,0.1);}
-.link-card.purple .link-icon{background:rgba(124,92,252,0.12);}
 .link-body{flex:1;min-width:0;}
 .link-body h3{font-size:15px;font-weight:600;}
-.link-body p{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.link-body p{font-size:11px;color:var(--muted);margin-top:2px;}
 .link-arrow{font-size:20px;color:var(--muted);}
-.edit-toggle{display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:10px;background:none;border:none;color:var(--muted);font-size:12px;font-family:'Noto Sans JP',sans-serif;cursor:pointer;margin-top:2px;}
-.edit-toggle:active{color:var(--accent);}
-.edit-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:none;margin-top:6px;}
-.edit-panel.open{display:block;}
-.edit-row{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:6px;}
-.edit-row:last-of-type{border-bottom:none;}
-.edit-row-head{font-size:12px;font-weight:600;}
-.form-control{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:13px;font-family:'Noto Sans JP',sans-serif;outline:none;-webkit-appearance:none;transition:border-color 0.2s;}
-.form-control:focus{border-color:var(--accent);}
-textarea.form-control{resize:none;height:76px;line-height:1.5;}
-.btn-save-links{width:calc(100% - 28px);margin:10px 14px 14px;padding:12px;border-radius:12px;background:var(--accent);border:none;color:white;font-size:14px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;}
-.btn-save-links:active{opacity:0.85;}
 .update-btn{width:100%;padding:18px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(79,142,247,0.28);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);}
-.update-btn:active{transform:scale(0.96);box-shadow:0 4px 14px rgba(79,142,247,0.15);}
+.update-btn:active{transform:scale(0.96);}
 .pulse{width:8px;height:8px;background:rgba(255,255,255,0.7);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.6);}}
 .log-wrap{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;}
 .log-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);}
 .log-head span{font-size:13px;font-weight:600;}
-.btn-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Noto Sans JP',sans-serif;}
-.btn-clear:active{color:#f7564f;}
+.btn-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;font-family:'Noto Sans JP',sans-serif;}
+.btn-clear:active{color:var(--red);}
 .log-empty{padding:36px 16px;text-align:center;color:var(--muted);font-size:13px;}
 .log-empty .em{font-size:30px;margin-bottom:8px;display:block;}
 .log-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);animation:fadeIn 0.3s ease;}
 .log-item:last-child{border-bottom:none;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
 .log-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:6px;}
+.log-dot.red{background:var(--red);}
 .log-name{font-size:14px;font-weight:600;}
 .log-time{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px;}
 .log-note{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;}
+.log-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:100px;margin-left:6px;font-weight:600;}
+.tag-update{background:rgba(45,212,160,0.15);color:var(--green);}
+.tag-request{background:rgba(247,86,79,0.15);color:var(--red);}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:none;align-items:flex-end;backdrop-filter:blur(6px);}
 .overlay.open{display:flex;}
 .modal{background:var(--surface);border-radius:26px 26px 0 0;width:100%;padding:20px 20px calc(24px + env(safe-area-inset-bottom));animation:slideUp 0.3s cubic-bezier(0.32,0.72,0,1);border-top:1px solid var(--border);}
@@ -71,11 +61,15 @@ textarea.form-control{resize:none;height:76px;line-height:1.5;}
 .modal h2{font-size:18px;font-weight:700;margin-bottom:20px;}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:0.5px;font-weight:500;}
+.form-control{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:15px;font-family:'Noto Sans JP',sans-serif;outline:none;-webkit-appearance:none;transition:border-color 0.2s;}
+.form-control:focus{border-color:var(--accent);}
+textarea.form-control{resize:none;height:80px;line-height:1.5;}
 .btn-row{display:flex;gap:10px;margin-top:18px;}
 .btn-cancel{flex:1;padding:14px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:15px;font-weight:500;font-family:'Noto Sans JP',sans-serif;cursor:pointer;}
 .btn-cancel:active{transform:scale(0.97);}
-.btn-record{flex:2;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(79,142,247,0.25);}
-.btn-record:active{transform:scale(0.97);opacity:0.9;}
+.btn-primary{flex:2;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(79,142,247,0.25);}
+.btn-primary:active{transform:scale(0.97);opacity:0.9;}
+.btn-green{background:linear-gradient(135deg,#2dd4a0,#1aab7a);box-shadow:0 4px 16px rgba(45,212,160,0.25);}
 .toast{position:fixed;top:58px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--green);color:#000;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;opacity:0;transition:all 0.28s;z-index:1000;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .hint{background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.13);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
@@ -85,59 +79,162 @@ textarea.form-control{resize:none;height:76px;line-height:1.5;}
 </head>
 <body>
 <div class="header">
-<div class="header-eyebrow">GOLD'S GYM 南船橋</div>
-<h1><span>シフト</span>ランチャー</h1>
-<div class="header-time" id="currentTime"></div>
+  <div class="header-eyebrow">GOLD'S GYM 南船橋</div>
+  <h1><span>シフト</span>ランチャー</h1>
+  <div class="header-time" id="currentTime"></div>
 </div>
+
 <div class="section">
-<div class="section-label">SHAREPOINT</div>
-<div class="hint"><span style="font-size:20px">📱</span><p><strong>ホーム画面に追加でワンタッチ起動</strong>iPhone: 共有 → ホームに追加　Android: メニュー → ホームに追加</p></div>
-<div class="link-card blue" onclick="openLink(0)"><div class="link-icon">📅</div><div class="link-body"><h3 id="label0">週間シフト表</h3><p id="desc0">URLを設定してください</p></div><div class="link-arrow">›</div></div>
-<div class="link-card green" onclick="openLink(1)"><div class="link-icon">📆</div><div class="link-body"><h3 id="label1">シフト表</h3><p id="desc1">URLを設定してください</p></div><div class="link-arrow">›</div></div>
-<div class="link-card purple" onclick="openLink(2)"><div class="link-icon">✏️</div><div class="link-body"><h3 id="label2">シフト申請</h3><p id="desc2">URLを設定してください</p></div><div class="link-arrow">›</div></div>
-<button class="edit-toggle" onclick="toggleEdit()">⚙️ URLを設定する</button>
-<div class="edit-panel" id="editPanel">
-<div class="edit-row"><div class="edit-row-head">📅 週間シフト表</div><input class="form-control" id="url0" type="url" placeholder="https://...sharepoint.com/..."><input class="form-control" id="lbl0" type="text" placeholder="ラベル名"></div>
-<div class="edit-row"><div class="edit-row-head">📆 シフト表</div><input class="form-control" id="url1" type="url" placeholder="https://...sharepoint.com/..."><input class="form-control" id="lbl1" type="text" placeholder="ラベル名"></div>
-<div class="edit-row"><div class="edit-row-head">✏️ シフト申請</div><input class="form-control" id="url2" type="url" placeholder="https://...sharepoint.com/..."><input class="form-control" id="lbl2" type="text" placeholder="ラベル名"></div>
-<button class="btn-save-links" onclick="saveLinks()">保存する</button>
+  <div class="section-label">SHAREPOINT</div>
+  <div class="hint">
+    <span style="font-size:20px">📱</span>
+    <p><strong>ホーム画面に追加でワンタッチ起動</strong>iPhone: 共有 → ホームに追加　Android: メニュー → ホームに追加</p>
+  </div>
+  <a class="link-card blue" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1" target="_blank">
+    <div class="link-icon">📅</div>
+    <div class="link-body"><h3>南船橋シフト</h3><p>SharePoint → シフトフォルダ</p></div>
+    <div class="link-arrow">›</div>
+  </a>
+  <div class="link-card green" onclick="openRequestModal()">
+    <div class="link-icon">✏️</div>
+    <div class="link-body"><h3>シフト申請</h3><p>希望日・理由を送信</p></div>
+    <div class="link-arrow">›</div>
+  </div>
 </div>
-</div>
+
 <div class="section" style="margin-top:24px">
-<div class="section-label">シフト更新</div>
-<button class="update-btn" onclick="openModal()"><div class="pulse"></div>シフトを更新した</button>
+  <div class="section-label">シフト更新</div>
+  <button class="update-btn" onclick="openUpdateModal()">
+    <div class="pulse"></div>シフトを更新した
+  </button>
 </div>
+
 <div class="section" style="margin-top:24px">
-<div class="section-label">更新ログ</div>
-<div class="log-wrap"><div class="log-head"><span>📋 更新履歴</span><button class="btn-clear" onclick="clearLog()">クリア</button></div><div id="logList"></div></div>
+  <div class="section-label">ログ</div>
+  <div class="log-wrap">
+    <div class="log-head"><span>📋 履歴</span><button class="btn-clear" onclick="clearLog()">クリア</button></div>
+    <div id="logList"></div>
+  </div>
 </div>
-<div class="overlay" id="overlay">
-<div class="modal">
-<div class="modal-handle"></div>
-<h2>🔄 更新を記録する</h2>
-<div class="form-group"><label>更新した人</label><input class="form-control" id="inputName" type="text" placeholder="例：松下"></div>
-<div class="form-group"><label>更新内容のメモ（任意）</label><textarea class="form-control" id="inputNote" placeholder="例：来週土日のシフトを修正しました"></textarea></div>
-<div class="btn-row"><button class="btn-cancel" onclick="closeModal()">キャンセル</button><button class="btn-record" onclick="saveLog()">記録する</button></div>
+
+<!-- 更新モーダル -->
+<div class="overlay" id="updateOverlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2>🔄 更新を記録する</h2>
+    <div class="form-group"><label>更新した人</label><input class="form-control" id="updaterName" type="text" placeholder="例：松下"></div>
+    <div class="form-group"><label>更新内容のメモ（任意）</label><textarea class="form-control" id="updateNote" placeholder="例：来週土日のシフトを修正しました"></textarea></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeAll()">キャンセル</button>
+      <button class="btn-primary" onclick="saveUpdate()">記録する</button>
+    </div>
+  </div>
 </div>
+
+<!-- 申請モーダル -->
+<div class="overlay" id="requestOverlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2>✏️ シフト申請</h2>
+    <div class="form-group"><label>名前</label><input class="form-control" id="reqName" type="text" placeholder="例：田中 さくら"></div>
+    <div class="form-group"><label>希望日</label><input class="form-control" id="reqDate" type="date"></div>
+    <div class="form-group"><label>理由</label><textarea class="form-control" id="reqReason" placeholder="例：私用のため"></textarea></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeAll()">キャンセル</button>
+      <button class="btn-primary btn-green" onclick="sendRequest()">送信する</button>
+    </div>
+  </div>
 </div>
+
 <div class="toast" id="toast"></div>
+
 <script>
-let data=JSON.parse(localStorage.getItem('shiftLauncher2')||'null')||{links:[{url:'',label:'週間シフト表'},{url:'',label:'シフト表'},{url:'',label:'シフト申請'}],log:[],lastUser:''};
-function save(){localStorage.setItem('shiftLauncher2',JSON.stringify(data));}
-(function tick(){const now=new Date();document.getElementById('currentTime').textContent=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'})+'　'+now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});setTimeout(tick,10000);})();
-const defaultLabels=['週間シフト表','シフト表','シフト申請'];
-function initLinks(){data.links.forEach((l,i)=>{document.getElementById('label'+i).textContent=l.label||defaultLabels[i];document.getElementById('desc'+i).textContent=l.url?l.url.replace(/^https?:\/\//,'').split('/')[0]:'URLを設定してください';document.getElementById('url'+i).value=l.url||'';document.getElementById('lbl'+i).value=l.label||'';});}
-function openLink(i){const l=data.links[i];if(!l.url){showToast('⚙️ URLを設定してください');document.getElementById('editPanel').classList.add('open');return;}window.open(l.url,'_blank');}
-function toggleEdit(){document.getElementById('editPanel').classList.toggle('open');}
-function saveLinks(){data.links.forEach((l,i)=>{l.url=document.getElementById('url'+i).value.trim();l.label=document.getElementById('lbl'+i).value.trim()||defaultLabels[i];});save();initLinks();document.getElementById('editPanel').classList.remove('open');showToast('URLを保存しました ✓');}
-function renderLog(){const el=document.getElementById('logList');if(!data.log.length){el.innerHTML='<div class="log-empty"><span class="em">📭</span>まだ更新ログはありません</div>';return;}el.innerHTML=[...data.log].reverse().map(item=>'<div class="log-item"><div class="log-dot"></div><div><div class="log-name">'+item.name+'</div><div class="log-time">'+item.time+'</div>'+(item.note?'<div class="log-note">📝 '+item.note+'</div>':'')+'</div></div>').join('');}
-function clearLog(){if(!confirm('更新ログをすべて削除しますか？'))return;data.log=[];save();renderLog();showToast('ログをクリアしました');}
-function openModal(){document.getElementById('inputName').value=data.lastUser||'';document.getElementById('inputNote').value='';document.getElementById('overlay').classList.add('open');setTimeout(()=>document.getElementById('inputName').focus(),200);}
-function closeModal(){document.getElementById('overlay').classList.remove('open');}
-function saveLog(){const name=document.getElementById('inputName').value.trim();if(!name){showToast('名前を入力してください');return;}const now=new Date();const time=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});data.log.push({name,time,note:document.getElementById('inputNote').value.trim()});if(data.log.length>60)data.log=data.log.slice(-60);data.lastUser=name;save();closeModal();renderLog();showToast(name+'さんの更新を記録しました ✓');}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});
-initLinks();renderLog();
+let data=JSON.parse(localStorage.getItem('shiftLog')||'null')||{log:[],lastUpdater:''};
+function save(){localStorage.setItem('shiftLog',JSON.stringify(data));}
+
+(function tick(){
+  const now=new Date();
+  document.getElementById('currentTime').textContent=
+    now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'})+'　'+
+    now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+  setTimeout(tick,10000);
+})();
+
+function openUpdateModal(){
+  document.getElementById('updaterName').value=data.lastUpdater||'';
+  document.getElementById('updateNote').value='';
+  document.getElementById('updateOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('updaterName').focus(),200);
+}
+function openRequestModal(){
+  document.getElementById('reqName').value='';
+  document.getElementById('reqDate').value='';
+  document.getElementById('reqReason').value='';
+  document.getElementById('requestOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('reqName').focus(),200);
+}
+function closeAll(){
+  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
+}
+
+function saveUpdate(){
+  const name=document.getElementById('updaterName').value.trim();
+  if(!name){showToast('名前を入力してください');return;}
+  const now=new Date();
+  const time=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
+  data.log.push({type:'update',name,time,note:document.getElementById('updateNote').value.trim()});
+  if(data.log.length>60)data.log=data.log.slice(-60);
+  data.lastUpdater=name;
+  save();closeAll();renderLog();
+  showToast(name+'さんの更新を記録しました ✓');
+}
+
+function sendRequest(){
+  const name=document.getElementById('reqName').value.trim();
+  const date=document.getElementById('reqDate').value;
+  const reason=document.getElementById('reqReason').value.trim();
+  if(!name||!date){showToast('名前と希望日を入力してください');return;}
+  const dateStr=new Date(date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
+  const subject=encodeURIComponent('【シフト申請】'+name+' '+dateStr);
+  const body=encodeURIComponent('【シフト申請】\n\n名前：'+name+'\n希望日：'+dateStr+'\n理由：'+(reason||'記載なし')+'\n\n※このメールはシフトランチャーから送信されました。');
+  window.location.href='mailto:ggmfc@goldsgym.jp?subject='+subject+'&body='+body;
+  const now=new Date();
+  const time=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
+  data.log.push({type:'request',name,time,note:dateStr+(reason?' / '+reason:'')});
+  if(data.log.length>60)data.log=data.log.slice(-60);
+  save();closeAll();renderLog();
+  showToast(name+'さんの申請を送信しました ✓');
+}
+
+function renderLog(){
+  const el=document.getElementById('logList');
+  if(!data.log.length){el.innerHTML='<div class="log-empty"><span class="em">📭</span>まだ履歴はありません</div>';return;}
+  el.innerHTML=[...data.log].reverse().map(item=>`
+    <div class="log-item">
+      <div class="log-dot ${item.type==='request'?'red':''}"></div>
+      <div>
+        <div class="log-name">${item.name}<span class="log-tag ${item.type==='request'?'tag-request':'tag-update'}">${item.type==='request'?'申請':'更新'}</span></div>
+        <div class="log-time">${item.time}</div>
+        ${item.note?`<div class="log-note">${item.note}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function clearLog(){
+  if(!confirm('履歴をすべて削除しますか？'))return;
+  data.log=[];save();renderLog();showToast('クリアしました');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+document.querySelectorAll('.overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)closeAll();});
+});
+
+renderLog();
 </script>
 </body>
 </html>
