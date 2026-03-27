@@ -31,7 +31,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .link-body h3{font-size:15px;font-weight:600;}
 .link-body p{font-size:11px;color:var(--muted);margin-top:2px;}
 .link-arrow{font-size:20px;color:var(--muted);}
-.update-btn{width:100%;padding:18px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(79,142,247,0.28);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+.update-btn{width:100%;padding:18px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(79,142,247,0.28);transition:all 0.2s;}
 .update-btn:active{transform:scale(0.96);}
 .pulse{width:8px;height:8px;background:rgba(255,255,255,0.7);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.6);}}
@@ -69,7 +69,7 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
 .btn-cancel:active{transform:scale(0.97);}
 .btn-primary{flex:2;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(79,142,247,0.25);}
 .btn-primary:active{transform:scale(0.97);opacity:0.9;}
-.btn-green{background:linear-gradient(135deg,#2dd4a0,#1aab7a);box-shadow:0 4px 16px rgba(45,212,160,0.25);}
+.btn-green{background:linear-gradient(135deg,#2dd4a0,#1aab7a) !important;box-shadow:0 4px 16px rgba(45,212,160,0.25) !important;}
 .toast{position:fixed;top:58px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--green);color:#000;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;opacity:0;transition:all 0.28s;z-index:1000;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .hint{background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.13);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
@@ -78,6 +78,7 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
 </style>
 </head>
 <body>
+
 <div class="header">
   <div class="header-eyebrow">GOLD'S GYM 南船橋</div>
   <h1><span>シフト</span>ランチャー</h1>
@@ -90,151 +91,4 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
     <span style="font-size:20px">📱</span>
     <p><strong>ホーム画面に追加でワンタッチ起動</strong>iPhone: 共有 → ホームに追加　Android: メニュー → ホームに追加</p>
   </div>
-  <a class="link-card blue" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1" target="_blank">
-    <div class="link-icon">📅</div>
-    <div class="link-body"><h3>南船橋シフト</h3><p>SharePoint → シフトフォルダ</p></div>
-    <div class="link-arrow">›</div>
-  </a>
-  <div class="link-card green" onclick="openRequestModal()">
-    <div class="link-icon">✏️</div>
-    <div class="link-body"><h3>シフト申請</h3><p>希望日・理由を送信</p></div>
-    <div class="link-arrow">›</div>
-  </div>
-</div>
-
-<div class="section" style="margin-top:24px">
-  <div class="section-label">シフト更新</div>
-  <button class="update-btn" onclick="openUpdateModal()">
-    <div class="pulse"></div>シフトを更新した
-  </button>
-</div>
-
-<div class="section" style="margin-top:24px">
-  <div class="section-label">ログ</div>
-  <div class="log-wrap">
-    <div class="log-head"><span>📋 履歴</span><button class="btn-clear" onclick="clearLog()">クリア</button></div>
-    <div id="logList"></div>
-  </div>
-</div>
-
-<!-- 更新モーダル -->
-<div class="overlay" id="updateOverlay">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h2>🔄 更新を記録する</h2>
-    <div class="form-group"><label>更新した人</label><input class="form-control" id="updaterName" type="text" placeholder="例：松下"></div>
-    <div class="form-group"><label>更新内容のメモ（任意）</label><textarea class="form-control" id="updateNote" placeholder="例：来週土日のシフトを修正しました"></textarea></div>
-    <div class="btn-row">
-      <button class="btn-cancel" onclick="closeAll()">キャンセル</button>
-      <button class="btn-primary" onclick="saveUpdate()">記録する</button>
-    </div>
-  </div>
-</div>
-
-<!-- 申請モーダル -->
-<div class="overlay" id="requestOverlay">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <h2>✏️ シフト申請</h2>
-    <div class="form-group"><label>名前</label><input class="form-control" id="reqName" type="text" placeholder="例：田中 さくら"></div>
-    <div class="form-group"><label>希望日</label><input class="form-control" id="reqDate" type="date"></div>
-    <div class="form-group"><label>理由</label><textarea class="form-control" id="reqReason" placeholder="例：私用のため"></textarea></div>
-    <div class="btn-row">
-      <button class="btn-cancel" onclick="closeAll()">キャンセル</button>
-      <button class="btn-primary btn-green" onclick="sendRequest()">送信する</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-let data=JSON.parse(localStorage.getItem('shiftLog')||'null')||{log:[],lastUpdater:''};
-function save(){localStorage.setItem('shiftLog',JSON.stringify(data));}
-
-(function tick(){
-  const now=new Date();
-  document.getElementById('currentTime').textContent=
-    now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'})+'　'+
-    now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
-  setTimeout(tick,10000);
-})();
-
-function openUpdateModal(){
-  document.getElementById('updaterName').value=data.lastUpdater||'';
-  document.getElementById('updateNote').value='';
-  document.getElementById('updateOverlay').classList.add('open');
-  setTimeout(()=>document.getElementById('updaterName').focus(),200);
-}
-function openRequestModal(){
-  document.getElementById('reqName').value='';
-  document.getElementById('reqDate').value='';
-  document.getElementById('reqReason').value='';
-  document.getElementById('requestOverlay').classList.add('open');
-  setTimeout(()=>document.getElementById('reqName').focus(),200);
-}
-function closeAll(){
-  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
-}
-
-function saveUpdate(){
-  const name=document.getElementById('updaterName').value.trim();
-  if(!name){showToast('名前を入力してください');return;}
-  const now=new Date();
-  const time=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
-  data.log.push({type:'update',name,time,note:document.getElementById('updateNote').value.trim()});
-  if(data.log.length>60)data.log=data.log.slice(-60);
-  data.lastUpdater=name;
-  save();closeAll();renderLog();
-  showToast(name+'さんの更新を記録しました ✓');
-}
-
-function sendRequest(){
-  const name=document.getElementById('reqName').value.trim();
-  const date=document.getElementById('reqDate').value;
-  const reason=document.getElementById('reqReason').value.trim();
-  if(!name||!date){showToast('名前と希望日を入力してください');return;}
-  const dateStr=new Date(date).toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
-  const subject=encodeURIComponent('【シフト申請】'+name+' '+dateStr);
-  const body=encodeURIComponent('【シフト申請】\n\n名前：'+name+'\n希望日：'+dateStr+'\n理由：'+(reason||'記載なし')+'\n\n※このメールはシフトランチャーから送信されました。');
-  window.location.href='mailto:ggmfc@goldsgym.jp?subject='+subject+'&body='+body;
-  const now=new Date();
-  const time=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
-  data.log.push({type:'request',name,time,note:dateStr+(reason?' / '+reason:'')});
-  if(data.log.length>60)data.log=data.log.slice(-60);
-  save();closeAll();renderLog();
-  showToast(name+'さんの申請を送信しました ✓');
-}
-
-function renderLog(){
-  const el=document.getElementById('logList');
-  if(!data.log.length){el.innerHTML='<div class="log-empty"><span class="em">📭</span>まだ履歴はありません</div>';return;}
-  el.innerHTML=[...data.log].reverse().map(item=>`
-    <div class="log-item">
-      <div class="log-dot ${item.type==='request'?'red':''}"></div>
-      <div>
-        <div class="log-name">${item.name}<span class="log-tag ${item.type==='request'?'tag-request':'tag-update'}">${item.type==='request'?'申請':'更新'}</span></div>
-        <div class="log-time">${item.time}</div>
-        ${item.note?`<div class="log-note">${item.note}</div>`:''}
-      </div>
-    </div>`).join('');
-}
-
-function clearLog(){
-  if(!confirm('履歴をすべて削除しますか？'))return;
-  data.log=[];save();renderLog();showToast('クリアしました');
-}
-
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-document.querySelectorAll('.overlay').forEach(o=>{
-  o.addEventListener('click',e=>{if(e.target===o)closeAll();});
-});
-
-renderLog();
-</script>
-</body>
-</html>
+  <a class="link-card blue" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%8
