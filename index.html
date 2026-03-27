@@ -2,42 +2,43 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="シフト">
-<meta name="theme-color" content="#0d0d14">
+<meta name="theme-color" content="#0f0f0f">
 <title>シフトランチャー</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0d14;--surface:#16161f;--surface2:#1e1e2a;--border:rgba(255,255,255,0.07);--accent:#4f8ef7;--accent2:#7c5cfc;--green:#2dd4a0;--red:#f7564f;--text:#e8e8f2;--muted:#6b6b85;--mono:'DM Mono',monospace;}
+:root{--bg:#0f0f0f;--surface:#1a1a1a;--surface2:#242424;--border:rgba(255,255,255,0.08);--gold:#f5c200;--gold2:#e6a800;--gold-dim:rgba(245,194,0,0.12);--gold-border:rgba(245,194,0,0.3);--text:#f0f0f0;--muted:#777;--red:#ff4444;--mono:'DM Mono',monospace;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;padding-bottom:48px;}
-.header{padding:52px 20px 20px;background:linear-gradient(180deg,rgba(79,142,247,0.07) 0%,transparent 100%);border-bottom:1px solid var(--border);}
-.header-eyebrow{font-size:10px;letter-spacing:2px;color:var(--accent);font-family:var(--mono);margin-bottom:6px;}
-.header h1{font-size:22px;font-weight:700;letter-spacing:-0.5px;}
-.header h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.header{padding:52px 20px 20px;background:linear-gradient(180deg,rgba(245,194,0,0.06) 0%,transparent 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));}
+.header-eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);font-family:var(--mono);margin-bottom:8px;font-weight:500;}
+.header h1{font-size:24px;font-weight:900;letter-spacing:-0.5px;}
+.header h1 span{color:var(--gold);}
 .header-time{font-size:12px;color:var(--muted);margin-top:5px;font-family:var(--mono);}
 .section{padding:22px 16px 0;}
-.section-label{font-size:10px;letter-spacing:1.5px;color:var(--muted);font-weight:600;margin-bottom:10px;font-family:var(--mono);}
-.link-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:10px;cursor:pointer;transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;color:var(--text);}
+.section-label{font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:600;margin-bottom:10px;font-family:var(--mono);}
+.card-row{display:flex;align-items:center;margin-bottom:10px;gap:8px;}
+.link-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--gold-border);border-radius:16px;padding:16px;cursor:pointer;transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;color:var(--text);flex:1;}
 .link-card:active{transform:scale(0.96);}
-.link-card.blue{border-color:rgba(79,142,247,0.25);}
-.link-card.green{border-color:rgba(45,212,160,0.2);}
-.link-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.link-card.blue .link-icon{background:rgba(79,142,247,0.13);}
-.link-card.green .link-icon{background:rgba(45,212,160,0.1);}
+.link-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:var(--gold-dim);}
 .link-body{flex:1;min-width:0;}
-.link-body h3{font-size:15px;font-weight:600;}
-.link-body p{font-size:11px;color:var(--muted);margin-top:2px;}
-.link-arrow{font-size:20px;color:var(--muted);}
-.update-btn{width:100%;padding:18px;border-radius:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:16px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(79,142,247,0.28);transition:all 0.2s;}
-.update-btn:active{transform:scale(0.96);}
-.pulse{width:8px;height:8px;background:rgba(255,255,255,0.7);border-radius:50%;animation:pulse 2s infinite;}
+.link-body h3{font-size:15px;font-weight:700;}
+.link-body p{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.link-arrow{font-size:20px;color:var(--gold);}
+.edit-btn{background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:11px;padding:8px 12px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;flex-shrink:0;white-space:nowrap;transition:all 0.15s;}
+.edit-btn:active{background:var(--gold-dim);color:var(--gold);border-color:var(--gold-border);}
+.update-btn{width:100%;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#000;font-size:16px;font-weight:900;font-family:'Noto Sans JP',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 28px rgba(245,194,0,0.25);transition:all 0.2s;letter-spacing:0.5px;}
+.update-btn:active{transform:scale(0.96);box-shadow:0 4px 14px rgba(245,194,0,0.15);}
+.pulse{width:8px;height:8px;background:rgba(0,0,0,0.4);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.6);}}
-.log-wrap{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;}
+.log-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
 .log-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);}
-.log-head span{font-size:13px;font-weight:600;}
+.log-head span{font-size:13px;font-weight:700;}
 .btn-clear{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;padding:4px 8px;font-family:'Noto Sans JP',sans-serif;}
 .btn-clear:active{color:var(--red);}
 .log-empty{padding:36px 16px;text-align:center;color:var(--muted);font-size:13px;}
@@ -45,40 +46,39 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .log-item{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);animation:fadeIn 0.3s ease;}
 .log-item:last-child{border-bottom:none;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
-.log-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:6px;}
-.log-name{font-size:14px;font-weight:600;}
+.log-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;}
+.log-name{font-size:14px;font-weight:700;}
 .log-time{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px;}
 .log-note{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;}
-.log-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:100px;margin-left:6px;font-weight:600;}
-.tag-update{background:rgba(45,212,160,0.15);color:var(--green);}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:none;align-items:flex-end;backdrop-filter:blur(6px);}
+.log-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:100px;margin-left:6px;font-weight:600;background:var(--gold-dim);color:var(--gold);}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:flex-end;backdrop-filter:blur(6px);}
 .overlay.open{display:flex;}
-.modal{background:var(--surface);border-radius:26px 26px 0 0;width:100%;padding:20px 20px calc(24px + env(safe-area-inset-bottom));animation:slideUp 0.3s cubic-bezier(0.32,0.72,0,1);border-top:1px solid var(--border);}
+.modal{background:var(--surface);border-radius:24px 24px 0 0;width:100%;padding:20px 20px calc(24px + env(safe-area-inset-bottom));animation:slideUp 0.3s cubic-bezier(0.32,0.72,0,1);border-top:2px solid var(--gold);}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px;}
-.modal h2{font-size:18px;font-weight:700;margin-bottom:20px;}
+.modal h2{font-size:18px;font-weight:900;margin-bottom:20px;}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:0.5px;font-weight:500;}
-.form-control{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:15px;font-family:'Noto Sans JP',sans-serif;outline:none;-webkit-appearance:none;transition:border-color 0.2s;}
-.form-control:focus{border-color:var(--accent);}
+.form-control{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:15px;font-family:'Noto Sans JP',sans-serif;outline:none;-webkit-appearance:none;transition:border-color 0.2s;}
+.form-control:focus{border-color:var(--gold);}
 textarea.form-control{resize:none;height:80px;line-height:1.5;}
 .btn-row{display:flex;gap:10px;margin-top:18px;}
 .btn-cancel{flex:1;padding:14px;border-radius:14px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:15px;font-weight:500;font-family:'Noto Sans JP',sans-serif;cursor:pointer;}
 .btn-cancel:active{transform:scale(0.97);}
-.btn-primary{flex:2;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;font-size:15px;font-weight:700;font-family:'Noto Sans JP',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(79,142,247,0.25);}
+.btn-primary{flex:2;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#000;font-size:15px;font-weight:900;font-family:'Noto Sans JP',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(245,194,0,0.2);}
 .btn-primary:active{transform:scale(0.97);opacity:0.9;}
-.toast{position:fixed;top:58px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--green);color:#000;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;opacity:0;transition:all 0.28s;z-index:1000;pointer-events:none;white-space:nowrap;}
+.toast{position:fixed;top:58px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--gold);color:#000;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;opacity:0;transition:all 0.28s;z-index:1000;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.hint{background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.13);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.hint{background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .hint p{font-size:11px;color:var(--muted);line-height:1.6;}
-.hint strong{color:var(--accent);font-size:11px;display:block;}
+.hint strong{color:var(--gold);font-size:11px;display:block;}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-eyebrow">GOLD'S GYM 南船橋</div>
-  <h1><span>シフト</span>ランチャー</h1>
+  <div class="header-eyebrow">GOLD'S GYM 南船橋千葉</div>
+  <h1>SHIFT <span>LAUNCHER</span></h1>
   <div class="header-time" id="currentTime"></div>
 </div>
 
@@ -88,16 +88,24 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
     <span style="font-size:20px">📱</span>
     <p><strong>ホーム画面に追加でワンタッチ起動</strong>iPhone: 共有 → ホームに追加　Android: メニュー → ホームに追加</p>
   </div>
-  <a class="link-card blue" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1" target="_blank">
-    <div class="link-icon">📅</div>
-    <div class="link-body"><h3>南船橋シフト</h3><p>SharePoint → シフトフォルダ</p></div>
-    <div class="link-arrow">›</div>
-  </a>
-  <a class="link-card green" href="https://forms.gle/AH6txmN4ZKJmqvQy8" target="_blank">
-    <div class="link-icon">✏️</div>
-    <div class="link-body"><h3>シフト申請</h3><p>Googleフォームで送信 → メールに届く</p></div>
-    <div class="link-arrow">›</div>
-  </a>
+
+  <div class="card-row">
+    <a class="link-card" id="card0" href="https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1" target="_blank" rel="noreferrer noopener">
+      <div class="link-icon">📅</div>
+      <div class="link-body"><h3 id="label0">南船橋シフト</h3><p id="desc0">SharePoint → シフトフォルダ</p></div>
+      <div class="link-arrow">›</div>
+    </a>
+    <button class="edit-btn" onclick="openEditModal(0)">編集</button>
+  </div>
+
+  <div class="card-row">
+    <a class="link-card" id="card1" href="https://forms.gle/AH6txmN4ZKJmqvQy8" target="_blank" rel="noreferrer noopener">
+      <div class="link-icon">✏️</div>
+      <div class="link-body"><h3 id="label1">シフト申請</h3><p id="desc1">Googleフォームで送信</p></div>
+      <div class="link-arrow">›</div>
+    </a>
+    <button class="edit-btn" onclick="openEditModal(1)">編集</button>
+  </div>
 </div>
 
 <div class="section" style="margin-top:24px">
@@ -108,14 +116,26 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
 </div>
 
 <div class="section" style="margin-top:24px">
-  <div class="section-label">ログ</div>
+  <div class="section-label">更新ログ</div>
   <div class="log-wrap">
     <div class="log-head"><span>📋 更新履歴</span><button class="btn-clear" onclick="clearLog()">クリア</button></div>
     <div id="logList"></div>
   </div>
 </div>
 
-<!-- 更新モーダル -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2>🔗 リンクを編集</h2>
+    <div class="form-group"><label>名前</label><input class="form-control" id="editLabel" type="text" placeholder="例：南船橋シフト"></div>
+    <div class="form-group"><label>URL</label><input class="form-control" id="editUrl" type="url" placeholder="https://..."></div>
+    <div class="btn-row">
+      <button class="btn-cancel" onclick="closeAll()">キャンセル</button>
+      <button class="btn-primary" onclick="saveEdit()">保存する</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="updateOverlay">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -132,9 +152,12 @@ textarea.form-control{resize:none;height:80px;line-height:1.5;}
 <div class="toast" id="toast"></div>
 
 <script>
-let data=JSON.parse(localStorage.getItem('shiftLog3')||'null')||{log:[],lastUpdater:''};
-function save(){localStorage.setItem('shiftLog3',JSON.stringify(data));}
-
+const DEFAULTS=[
+  {label:'南船橋シフト',url:'https://thinkgold-my.sharepoint.com/personal/ggmfc_goldsgym_jp/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fggmfc%5Fgoldsgym%5Fjp%2FDocuments%2F%E3%82%B7%E3%83%95%E3%83%88&ga=1',desc:'SharePoint → シフトフォルダ'},
+  {label:'シフト申請',url:'https://forms.gle/AH6txmN4ZKJmqvQy8',desc:'Googleフォームで送信'},
+];
+let data=JSON.parse(localStorage.getItem('shiftGG')||'null')||{links:DEFAULTS.map(d=>({...d})),log:[],lastUpdater:''};
+function save(){localStorage.setItem('shiftGG',JSON.stringify(data));}
 (function tick(){
   const now=new Date();
   document.getElementById('currentTime').textContent=
@@ -142,15 +165,35 @@ function save(){localStorage.setItem('shiftLog3',JSON.stringify(data));}
     now.toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
   setTimeout(tick,10000);
 })();
-
+function initCards(){
+  data.links.forEach((l,i)=>{
+    document.getElementById('label'+i).textContent=l.label;
+    document.getElementById('desc'+i).textContent=l.url?l.url.replace(/^https?:\/\//,'').split('/')[0]:l.desc;
+    document.getElementById('card'+i).href=l.url||'#';
+  });
+}
+let editingIndex=0;
+function openEditModal(i){
+  editingIndex=i;
+  document.getElementById('editLabel').value=data.links[i].label;
+  document.getElementById('editUrl').value=data.links[i].url;
+  document.getElementById('editOverlay').classList.add('open');
+  setTimeout(()=>document.getElementById('editLabel').focus(),200);
+}
+function saveEdit(){
+  const label=document.getElementById('editLabel').value.trim();
+  const url=document.getElementById('editUrl').value.trim();
+  if(!label||!url){showToast('名前とURLを入力してください');return;}
+  data.links[editingIndex].label=label;
+  data.links[editingIndex].url=url;
+  save();initCards();closeAll();
+  showToast('保存しました ✓');
+}
 function openUpdateModal(){
   document.getElementById('updaterName').value=data.lastUpdater||'';
   document.getElementById('updateNote').value='';
   document.getElementById('updateOverlay').classList.add('open');
   setTimeout(()=>document.getElementById('updaterName').focus(),200);
-}
-function closeAll(){
-  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
 }
 function saveUpdate(){
   const name=document.getElementById('updaterName').value.trim();
@@ -170,7 +213,7 @@ function renderLog(){
     <div class="log-item">
       <div class="log-dot"></div>
       <div>
-        <div class="log-name">${item.name}<span class="log-tag tag-update">更新</span></div>
+        <div class="log-name">${item.name}<span class="log-tag">更新</span></div>
         <div class="log-time">${item.time}</div>
         ${item.note?`<div class="log-note">📝 ${item.note}</div>`:''}
       </div>
@@ -180,6 +223,7 @@ function clearLog(){
   if(!confirm('履歴をすべて削除しますか？'))return;
   data.log=[];save();renderLog();showToast('クリアしました');
 }
+function closeAll(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));}
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2500);
@@ -187,7 +231,7 @@ function showToast(msg){
 document.querySelectorAll('.overlay').forEach(o=>{
   o.addEventListener('click',e=>{if(e.target===o)closeAll();});
 });
-renderLog();
+initCards();renderLog();
 </script>
 </body>
 </html>
